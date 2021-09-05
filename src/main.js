@@ -11,6 +11,13 @@ import './assets/css/global.css'
 import axions from 'axios'
 // 配置请求根路径
 Vue.prototype.$http = axions
+
+// 请求拦截器添加token，保存数据的权限
+axions.interceptors.request.use(config => {
+  console.log(config)
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
 axions.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 
 Vue.config.productionTip = false
